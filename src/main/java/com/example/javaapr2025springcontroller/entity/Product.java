@@ -2,8 +2,8 @@ package com.example.javaapr2025springcontroller.entity;
 
 import java.util.Objects;
 
-public class Product {
-    private Integer productId;
+public class Product { // entity
+    private Integer productId; // PRODUCT_ID
     private String productName;
     private String productDesc;
 
