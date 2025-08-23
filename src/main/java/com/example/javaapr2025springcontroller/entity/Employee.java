@@ -1,9 +1,6 @@
 package com.example.javaapr2025springcontroller.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -11,8 +8,9 @@ import java.util.Objects;
 @Table(name = "EMP")
 public class Employee {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer employeeId;
-    @Column(name = "name",length = 50,nullable = false)
+    @Column(name = "FIRST_NAME",length = 50,nullable = false)
     private String firstName;
     private String lastName;
     private String phoneNumber;

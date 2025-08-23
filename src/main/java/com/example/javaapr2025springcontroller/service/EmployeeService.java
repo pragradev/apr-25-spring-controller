@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.sql.SQLDataException;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -32,5 +34,38 @@ public class EmployeeService {
 
         }
         return all;
+    }
+
+    public Optional<Employee> getEmpById(Integer id){
+        return employeeRepo.findById(id);
+    }
+
+    public Employee updateEmployee(Employee employee){
+        Optional<Employee> optionalEmployee = getEmpById(employee.getEmployeeId());
+        if (optionalEmployee.isPresent()){
+            employee = employeeRepo.save(employee);
+        }
+        return employee;
+    }
+
+    public Employee patchEmployee(Employee dto){
+        Optional<Employee> optionalEmployee = getEmpById(dto.getEmployeeId());
+        if (optionalEmployee.isPresent()){
+            Employee entity = optionalEmployee.get();
+            if (Objects.nonNull(dto.getFirstName())){
+                entity.setFirstName(dto.getFirstName());
+            }
+            if (Objects.nonNull(dto.getLastName())){
+                entity.setLastName(dto.getLastName());
+            }
+            if (Objects.nonNull(dto.getCompany())){
+                entity.setCompany(dto.getCompany());
+            }
+            if (Objects.nonNull(dto.getPhoneNumber())){
+                entity.setPhoneNumber(dto.getPhoneNumber());
+            }
+            return employeeRepo.save(entity);
+        }
+        return null;
     }
 }
