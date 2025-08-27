@@ -1,7 +1,11 @@
 package com.example.javaapr2025springcontroller.service;
 
 import com.example.javaapr2025springcontroller.entity.Employee;
+import com.example.javaapr2025springcontroller.entity.EmployeeMachine;
+import com.example.javaapr2025springcontroller.entity.EmployeeReviews;
+import com.example.javaapr2025springcontroller.repository.EmployeeMachineRepo;
 import com.example.javaapr2025springcontroller.repository.EmployeeRepo;
+import com.example.javaapr2025springcontroller.repository.EmployeeReviewRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
@@ -20,10 +24,24 @@ public class EmployeeService {
 
     @Autowired
     EmployeeRepo employeeRepo;
+    @Autowired
+    EmployeeMachineRepo employeeMachineRepo;
+    @Autowired
+    EmployeeReviewRepo employeeReviewRepo;
 
     public Employee addEmp(Employee employee){
+        List<EmployeeReviews> employeeReviews = employeeReviewRepo.saveAll(employee.getEmployeeReviews());
+        employee.setEmployeeReviews(employeeReviews);
+        EmployeeMachine savedEmployeeMachine = employeeMachineRepo.save(employee.getEmployeeMachine());
+        employee.setEmployeeMachine(savedEmployeeMachine);
         return employeeRepo.save(employee);
     }
+    // session
+    // transaction
+    // all 5 operation
+    // rollback
+    // no issues: commit transaction and flush session
+
 
 
     public List<Employee> getAllEmp(){
@@ -68,4 +86,10 @@ public class EmployeeService {
         }
         return null;
     }
+
+    public List<Employee> getEmpByFirstName(String firstName){
+        return employeeRepo.getByFNwithSQL(firstName);
+    }
+
+
 }
