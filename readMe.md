@@ -45,3 +45,15 @@ INTERFACES PARENTS
 
 Fetchtype : reading data - select
 cascading : insert/ update/ delete
+
+Deleting Data:
+
+Hard delete - 10
+soft delete - 90 , IsActive = 0/1
+
+Consumption for API (Rest)
+HTTP Clients
+
+Rest Template (Spring Web)
+Webclient 
+Feign client

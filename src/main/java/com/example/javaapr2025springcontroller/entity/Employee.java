@@ -16,11 +16,16 @@ public class Employee {
     private String lastName;
     private String phoneNumber;
     private String company;
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.DETACH)
     private EmployeeMachine employeeMachine;
-
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<EmployeeReviews> employeeReviews;
+
+    //
+
+    // Session  3, 4
+    // transaction
+    // session
 
 
 

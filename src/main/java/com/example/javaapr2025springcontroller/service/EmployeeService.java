@@ -30,11 +30,13 @@ public class EmployeeService {
     EmployeeReviewRepo employeeReviewRepo;
 
     public Employee addEmp(Employee employee){
-        List<EmployeeReviews> employeeReviews = employeeReviewRepo.saveAll(employee.getEmployeeReviews());
-        employee.setEmployeeReviews(employeeReviews);
-        EmployeeMachine savedEmployeeMachine = employeeMachineRepo.save(employee.getEmployeeMachine());
-        employee.setEmployeeMachine(savedEmployeeMachine);
         return employeeRepo.save(employee);
+
+//        List<EmployeeReviews> employeeReviews = employeeReviewRepo.saveAll(employee.getEmployeeReviews());
+//        employee.setEmployeeReviews(employeeReviews);
+//        EmployeeMachine savedEmployeeMachine = employeeMachineRepo.save(employee.getEmployeeMachine());
+//        employee.setEmployeeMachine(savedEmployeeMachine);
+//        return employeeRepo.save(employee);
     }
     // session
     // transaction
@@ -89,6 +91,17 @@ public class EmployeeService {
 
     public List<Employee> getEmpByFirstName(String firstName){
         return employeeRepo.getByFNwithSQL(firstName);
+    }
+
+    public boolean deleteEmployee(Integer id){
+        try {
+            employeeRepo.deleteById(id);
+            return true;
+        } catch (DataAccessException e){
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
 

@@ -69,4 +69,9 @@ public class EmployeeController {
         List<String> reviewDesc = employeeReviews.stream().map(er -> er.getReviewDesc()).collect(Collectors.toList());
         return reviewDesc;
     }
+
+    @DeleteMapping("/byId/{id}")
+    public boolean deleteEmployee(@PathVariable("id") Integer id){
+        return employeeService.deleteEmployee(id);
+    }
 }
