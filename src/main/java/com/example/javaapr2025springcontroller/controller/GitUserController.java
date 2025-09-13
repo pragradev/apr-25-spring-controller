@@ -18,6 +18,6 @@ public class GitUserController {
 
     @GetMapping("user/{username}")
     public GitUser fetchUser(@PathVariable("username") String username){
-        return gitUserService.fetchUser(username);
+        return gitUserService.getUser(username);
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.DataSourceFactory;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.sql.DataSource;
 
@@ -24,6 +25,16 @@ public class AppConfig {
     @Bean
     public RestTemplate restTemplate(){
         return new RestTemplate();
+    }
+
+    @Bean
+    public WebClient webClientGitHub(){
+        return WebClient.builder().baseUrl("https://api.github.com").build();
+    }
+
+    @Bean
+    public WebClient webClientGoogle(){
+        return WebClient.builder().baseUrl("https://api.google.com").build();
     }
 
 //    @Bean
